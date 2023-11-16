@@ -1,0 +1,59 @@
+on:
+  push:
+    branches:
+      - main
+      - add-make-struct
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    # Variáveis para reutilizar em outros steps
+    outputs:
+      BRANCH_NAME: ${{ steps.get_branch.outputs.branch }}
+      IMAGE_TAG: ${{ steps.image_name.outputs.image_tag }}
+    name: Build Docker Image and running tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get repository name
+        id: get_repository
+        run: echo name=eng-software >> $GITHUB_OUTPUT
+
+      - name: Get branch name
+        id: get_branch
+        run: echo branch=${{ github.ref_name }} >> $GITHUB_OUTPUT
+
+      - name: Create image name
+        id: image_name
+        env:
+          REPOSITORY_NAME: ${{ steps.get_repository.outputs.name }}
+          IMAGE_TAG: ${{ steps.get_branch.outputs.branch }}-${{ github.sha }}
+        run: |
+          echo image_name=${REPOSITORY_NAME} >> $GITHUB_OUTPUT
+          echo image_tag=${IMAGE_TAG} >> $GITHUB_OUTPUT
+
+      - name: Build
+        id: build
+        env:
+          IMAGE_NAME: ${{ steps.image_name.outputs.image_name }}
+          IMAGE_TAG: ${{ steps.image_name.outputs.image_tag }}
+          DOCKERFILE_PATH: Dockerfile
+        run: |
+          docker build \
+            -f ${DOCKERFILE_PATH} \
+            -t ${IMAGE_NAME}:${IMAGE_TAG} .
+
+      # - name: Run linter
+      #   env:
+      #     IMAGE_NAME: ${{ steps.image_name.outputs.image_name }}
+      #     IMAGE_TAG: ${{ steps.image_name.outputs.image_tag }}
+      #   run: |
+      #     make run-lint-app #falta implementar se a gente achar que deve ter.
+
+      - name: Run test
+        env:
+          IMAGE_NAME: ${{ steps.image_name.outputs.image_name }}
+          IMAGE_TAG: ${{ steps.image_name.outputs.image_tag }}
+        run: |
+          make run-testes

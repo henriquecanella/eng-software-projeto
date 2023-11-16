@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+  eng-sofware:
+    container_name: ${CONTAINER_NAME}
+    image: ${IMAGE_NAME}:${IMAGE_TAG}
+    environment:
+      PYTHONPATH: grader
+      PYTHONUNBUFFERED: 1
+    networks:
+      - eng-sofware-rede
+    build:
+      dockerfile: Dockerfile
+      context: .
+    command: sleep 99999999 #usando só pra manter o container de pé. Quando a gente tiver o software rodando corretamente, a gente muda.
+    volumes:
+      - .:/app
+
+networks:
+  eng-sofware-rede:
+    driver: bridge
