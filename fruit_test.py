@@ -17,5 +17,5 @@ def fruit_basket_failure(my_fruit):
 def teste_my_fruit_in_basket(my_fruit, fruit_basket_ok):
     assert my_fruit in fruit_basket_ok
 
-# def teste_my_fruit_in_basket(my_fruit, fruit_basket_failure):
-#     assert my_fruit in fruit_basket_failure
+def teste_my_fruit_in_basket(my_fruit, fruit_basket_failure):
+    assert my_fruit in fruit_basket_failure
