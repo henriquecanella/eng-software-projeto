@@ -10,7 +10,7 @@ Para executar a stack, precisa do docker instalado na máquina. O [Docker][docke
 
 ### Instalação Docker
 
-Considerando que você usao uma distribuição Linux baseada em Debian, execute:
+Considerando que você usa uma distribuição Linux baseada em Debian, execute:
 
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
