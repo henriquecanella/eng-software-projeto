@@ -11,9 +11,11 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    command: sleep 99999999 #usando só pra manter o container de pé. Quando a gente tiver o software rodando corretamente, a gente muda.
+    command: uvicorn eng_software_projeto.main:app --host 0.0.0.0
     volumes:
       - .:/app
+    ports:
+      - 8008:8000
 
 networks:
   eng-sofware-rede:
