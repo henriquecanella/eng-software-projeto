@@ -86,3 +86,25 @@ make shell
 
 [docker_wiki]: https://pt.wikipedia.org/wiki/Docker_(software)]
 [docker-compose_ref]: https://www.mundodocker.com.br/docker-compose/
+
+# Executando localmente sem o Docker
+
+## Python 3.12
+
+Para instalar a versão correta do python você pode seguir as instrucoes do 
+[site oficial]: https://www.python.org/downloads/release/python-3120/
+ou utilizar um gerenciador de versão como `pyenv`
+[pyenv_repo]: https://github.com/pyenv/pyenv
+
+## Poetry
+
+Para instalar o poetry em seu sistema (considerando um sistema Linux, macOS, Windows WSL) execute
+
+``` bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+## Executando o projeto
+
+Para instalar as dependencias do projeto execute o comando `poetry install` e para entrar no ambiente virtual criado `poetry shell`.
+Para executar o projeto basta rodar o comando `poetry run start` para executar o servidor web
