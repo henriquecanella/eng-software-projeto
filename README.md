@@ -26,7 +26,9 @@ apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 
 O [docker-compose][docker-compose_ref] é uma ferramenta que agilizaa o deploy de ambientes, utilizando uma forma simples, claro e padronizada. É uma forma de definir infraestrutura docker em um só arquivo, considerando rede, volumes, etc.
 
-### Install docker-compose
+### Install docker-compose 
+
+Source Code Docker-Compose: https://github.com/docker/compose/releases/tag/v2.24.0
 
 1. Download da versão mais recente do docker-compose:
 
