@@ -10,6 +10,8 @@ python = "^3.10"
 pytest = "^7.4.4"
 fastapi = "^0.108.0"
 uvicorn = {extras = ["standard"], version = "^0.25.0"}
+fastapi-htmx = "^0.4.1"
+sqlalchemy = "^2.0.25"
 
 
 [tool.poetry.group.dev.dependencies]
