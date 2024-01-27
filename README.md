@@ -26,7 +26,7 @@ apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-co
 
 O [docker-compose][docker-compose_ref] é uma ferramenta que agilizaa o deploy de ambientes, utilizando uma forma simples, claro e padronizada. É uma forma de definir infraestrutura docker em um só arquivo, considerando rede, volumes, etc.
 
-### Install docker-compose 
+### Install docker-compose
 
 Source Code Docker-Compose: https://github.com/docker/compose/releases/tag/v2.24.0
 
@@ -89,11 +89,72 @@ make shell
 [docker_wiki]: https://pt.wikipedia.org/wiki/Docker_(software)]
 [docker-compose_ref]: https://www.mundodocker.com.br/docker-compose/
 
+# Usando Database PostgreSQL
+
+Para subir o banco, basta executar o mesmo comando de `UP` da aplicação:
+
+```bash
+make run-app
+```
+
+ou ainda
+
+```bash
+make run-app-detached
+```
+
+## Conectar no container do banco PostgreSQL
+
+Para conectar no container do banco e verificar os dados lá contidos, basta:
+
+```bash
+make shell-db
+```
+
+Dentro do banco, basta selecionar o database e executar os comandos desejados.
+
+Exemplo de comandos básicos de PostgreSQL para interagir com o banco:
+
+`\l`: Lista todos os Databases
+
+`\c <DATABASE_NAME>`: Seleciona o Database que será usado nos comandos
+
+`\dt+`: Mostra todas as tabelas no Database selecionado
+
+`\dt+ <TABLE_NAME>`: _Describe_ em detalhes toda a tabela
+
+
+## Gerar Database e Tabelas no PostgreSQL
+
+Para gerar o database e as tabelas no banco, basta:
+
+```bash
+make run-database
+```
+
+Este comando irá executar tudo que está definido no script _database/database.sql_. Caso precise mudar algo na estrutura do banco, dê preferência para usar o script. Assim, caso outra pessoa vá configurar seu ambiente, terá a estrutura atualizada.
+
+## Destruir o banco PostgreSQL
+
+Caso seja necessário limpar de uma vez o banco, basta:
+
+```bash
+make down
+```
+Para desligar toda a stack e em seguida, pois se você tentar limpar o banco com a stack UP, pode ter erros. Após isso, executar o comando para deletar o banco:
+
+```bash
+make clean-database
+```
+
+Esse comando será executado como _sudo_, pois precisa deletar conteúdo criado pelo docker.
+
+
 # Executando localmente sem o Docker
 
 ## Python 3.12
 
-Para instalar a versão correta do python você pode seguir as instrucoes do 
+Para instalar a versão correta do python você pode seguir as instrucoes do
 [site oficial]: https://www.python.org/downloads/release/python-3120/
 ou utilizar um gerenciador de versão como `pyenv`
 [pyenv_repo]: https://github.com/pyenv/pyenv

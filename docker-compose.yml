@@ -6,6 +6,8 @@ services:
     environment:
       PYTHONPATH: grader
       PYTHONUNBUFFERED: 1
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
     networks:
       - eng-sofware-rede
     build:
@@ -16,6 +18,20 @@ services:
       - .:/app
     ports:
       - 8008:8000
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - ./volumes/postgresql:/var/lib/postgresql/data
+      - ./database:/database
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+    networks:
+      - eng-sofware-rede
 
 networks:
   eng-sofware-rede:
