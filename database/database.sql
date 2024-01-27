@@ -1,3 +1,7 @@
+SELECT 'CREATE DATABASE dbgestaodeconhecimento' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'dbgestaodeconhecimento')\gexec
+
+\c dbgestaodeconhecimento;
+
 CREATE TABLE IF NOT EXISTS tbl_projetos (
   id_projeto SERIAL PRIMARY KEY,
   titulo VARCHAR(45) NOT NULL,

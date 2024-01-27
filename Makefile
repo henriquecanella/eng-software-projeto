@@ -16,8 +16,7 @@ run-testes: build
 	docker run --rm -v .:/app ${IMAGE_NAME}:${IMAGE_TAG} bash -c "python3 -m pytest"
 
 run-database-generate:
-	@docker exec postgres bash -c "echo \"SELECT 'CREATE DATABASE dbgestaodeconhecimento' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'dbgestaodeconhecimento')\gexec\" | psql -U user"
-	@docker exec postgres bash -c 'psql -U $${POSTGRES_USER} -d dbgestaodeconhecimento -f database/database.sql'
+	@docker exec postgres bash -c 'psql -U $${POSTGRES_USER} -f database/database.sql'
 
 run-app: build
 	IMAGE_TAG=${IMAGE_TAG} IMAGE_NAME=${IMAGE_NAME} CONTAINER_NAME=${CONTAINER_NAME} docker-compose up
