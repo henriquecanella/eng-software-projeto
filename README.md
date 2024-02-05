@@ -55,8 +55,7 @@ Para subir um container com a imagem construida anteriormente, basta rodar o com
 ```bash
 make run-app
 ```
-
-Ou ainda, para executar o serviço e liberar o terminal, execute:
+Com o comando acima, o terminal fica bloqueado e você verá todos os logs dos containers que estão rodando e sendo gerenciados pelo `docker-compose.yml`. Para rodar a stack sem ver os logs e liberar o terminal, execute:
 
 ```bash
 make run-app-detached
@@ -88,6 +87,25 @@ make shell
 
 [docker_wiki]: https://pt.wikipedia.org/wiki/Docker_(software)]
 [docker-compose_ref]: https://www.mundodocker.com.br/docker-compose/
+
+
+# Acesso Local Frontend e Backend
+
+## Frontend
+
+Para acessar o frontend, basta acessar no Browser o endereço `localhost`, ou ainda pode configurar o seu arquivo `/etc/hosts` e adicionar a linha confome abaixo e o site estará disponível no endereço `eng-software.local`:
+
+```
+127.0.0.1 eng-software.local
+```
+
+## Backend
+
+Para acessar o backend, basta acessar no Browser o endereço `localhost:8008`, ou ainda pode configurar o seu arquivo `/etc/hosts` e adicionar a linha confome abaixo e o site estará disponível no endereço `eng-software-backend.local:8008`:
+
+```
+127.0.0.1 eng-software-backend.local
+```
 
 # Usando Database PostgreSQL
 
