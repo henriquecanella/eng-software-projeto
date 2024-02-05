@@ -23,13 +23,13 @@ services:
     image: nginx:latest
     container_name: eng-sofware-nginx
     restart: always
-    ports:
-    - "80:80"
     links:
     - eng-sofware-front
     volumes:
     - ./eng_software_projeto-frontend:/www
     - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
 
   eng-sofware-front:
     image: php:7.3-fpm
