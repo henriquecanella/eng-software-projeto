@@ -19,6 +19,24 @@ services:
     ports:
       - 8008:8000
 
+  eng-sofware-nginx:
+    image: nginx:latest
+    container_name: eng-sofware-nginx
+    restart: always
+    ports:
+    - "80:80"
+    links:
+    - eng-sofware-front
+    volumes:
+    - ./eng_software_projeto-frontend:/www
+    - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+
+  eng-sofware-front:
+    image: php:7.3-fpm
+    container_name: eng-sofware-front-php-fpm
+    volumes:
+    - ./eng_software_projeto-frontend:/www
+
   postgres:
     image: postgres
     container_name: postgres

@@ -18,7 +18,7 @@ run-testes: build
 run-database-generate:
 	@docker exec postgres bash -c 'psql -U $${POSTGRES_USER} -f database/database.sql'
 
-run-app: build
+run-app:
 	IMAGE_TAG=${IMAGE_TAG} IMAGE_NAME=${IMAGE_NAME} CONTAINER_NAME=${CONTAINER_NAME} docker-compose up
 
 run-app-detached:
