@@ -194,3 +194,21 @@ CREATE TABLE IF NOT EXISTS tbl_feedback (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+INSERT INTO tbl_pessoas (
+  nome,
+  email,
+  usuario,
+  senha,
+  wpp,
+  skype,
+  cargo
+  ) VALUES (
+    'Administrador',
+    'admin@local',
+    'admin',
+    'admin',
+    '00000000000',
+    'admin@local',
+     1
+  );

@@ -1,3 +1,8 @@
+<?php
+  require 'verificar_login.php';
+  include 'header.php';
+// pagina protegida, incluir script de verificação de login
+  ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,7 +14,6 @@
 </head>
 <body class="bg-light">
 <div id="header">
-  <?php include 'header.php'; ?>
 </div>
 
 <div class="container-fluid">
@@ -61,7 +65,7 @@
 
             <div id="competenciasContainer">
               <h4 class="mb-4">Competências Necessárias</h4>
-              <div id="competenciasDiv"> 
+              <div id="competenciasDiv">
               </div>
               <div class="row mb-4">
                 <div class="col-md-3">
@@ -89,7 +93,7 @@
               </div>
               <button type="button" class="btn btn-success" onclick="adicionarCompetencia()">Adicionar Competência</button>
             </div>
-            
+
             <div class="mb-3 mt-3">
               <label for="analistas" class="form-label">Analistas Competentes</label>
 
@@ -104,7 +108,7 @@
                   <input type="text" class="form-control" name="compatibilidadeAnalista1" value="94%" readonly>
                 </div>
               </div>
-              
+
               <div class="row align-items-center">
                 <div class="col-md-6">
                   <div class="form-check">
