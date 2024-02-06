@@ -36,8 +36,7 @@ if (!empty($_POST)) {
 
         header("Location: pagina_inicial.php");
     } else {
-        // falhou o login
-        echo "<p>Utilizador ou password invalidos. <a href=\"login.php\">Tente novamente</a></p>";
+        header("Location: usuario_senha_incorretos.php");
     }
 }
 ?>
