@@ -1,3 +1,8 @@
+<?php
+  require 'verificar_login.php';
+  include 'header.php';
+// pagina protegida, incluir script de verificação de login
+  ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,9 +13,6 @@
   <title>Cadastro de Subtarefa</title>
 </head>
 <body class="bg-light">
-<div id="header">
-  <?php include 'header.php'; ?>
-</div>
 
 <div class="container-fluid">
   <div class="row justify-content-center align-items-center min-vh-100">
@@ -71,7 +73,7 @@
 
             <div id="competenciasContainer">
               <h4 class="mb-3">Competências Necessárias</h4>
-              <div id="competenciasDiv"> 
+              <div id="competenciasDiv">
               </div>
               <div class="row mb-3">
                 <div class="col-md-3">
@@ -113,7 +115,7 @@
                   <input type="text" class="form-control" name="compatibilidadeAnalista1" value="94%" readonly>
                 </div>
               </div>
-              
+
               <div class="row align-items-center">
                 <div class="col-md-6">
                   <div class="form-check">

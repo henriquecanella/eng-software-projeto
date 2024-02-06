@@ -1,3 +1,8 @@
+<?php
+  require 'verificar_login.php';
+  include 'header.php';
+// pagina protegida, incluir script de verificação de login
+  ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,9 +12,6 @@
   <title>Seleção de Competência</title>
 </head>
 <body class="bg-light">
-<div id="header">
-  <?php include 'header.php'; ?>
-</div>
   <div class="container-fluid">
     <div class="row justify-content-center align-items-center mt-5">
       <div class="col-md-6">
