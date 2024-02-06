@@ -34,9 +34,9 @@ def auth(user: UserBase):
     usuario = user.usuario
     senha = user.senha
 
-    user_local = session.query(User).filter_by(usuario=usuario).one_or_none()
+    user_local = session.query(User).filter_by(usuario=usuario, senha=senha).one_or_none()
     if user_local != None:
-        return {"Hello": "World"}
+        return {"usuario": usuario, "logged": "True"}
     else:
         return {"null"}
 
