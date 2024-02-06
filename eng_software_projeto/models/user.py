@@ -3,10 +3,14 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
-
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = "tbl_pessoas"
 
-    id = Column(Integer, primary_key=True)
+    id_pessoas = Column(Integer, primary_key=True)
+    nome = Column(String, index=True)
     email = Column(String, unique=True, index=True)
-    password = Column(String)
+    usuario = Column(String, unique=True, index=True)
+    senha = Column(String)
+    wpp = Column(String)
+    skype = Column(String)
+    cargo = Column(Integer)

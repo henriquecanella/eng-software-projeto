@@ -3,11 +3,13 @@ services:
   eng-sofware:
     container_name: ${CONTAINER_NAME}
     image: ${IMAGE_NAME}:${IMAGE_TAG}
+    depends_on:
+      - postgres
     environment:
       PYTHONPATH: grader
       PYTHONUNBUFFERED: 1
-      POSTGRES_USER: "user"
-      POSTGRES_PASSWORD: "password"
+      DB_URL: postgresql://user:password@postgres/dbgestaodeconhecimento
+      LOGLEVEL: INFO
     networks:
       - eng-sofware-rede
     build:
@@ -34,6 +36,11 @@ services:
   eng-sofware-front:
     image: php:7.3-fpm
     container_name: eng-sofware-front-php-fpm
+    environment:
+      BACKEND_ADDRESS: eng-sofware
+    depends_on:
+      - postgres
+      - eng-sofware
     volumes:
     - ./eng_software_projeto-frontend:/www
 

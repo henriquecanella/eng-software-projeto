@@ -1,6 +1,10 @@
 # Use a imagem slim do Python 3.12 como base
 FROM python:3.12-slim
 
+RUN apt update && apt install -y \
+    libpq-dev \
+    gcc
+
 # Define o diretório de trabalho no container
 WORKDIR /app
 COPY poetry.lock pyproject.toml /app/

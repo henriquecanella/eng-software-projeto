@@ -1,11 +1,23 @@
-from pathlib import Path
-
-from typing import Union
 import uvicorn
+import logging
+import os
+
+from pathlib import Path
+from typing import Union
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi_htmx import htmx, htmx_init
+from pydantic import BaseModel
+from .models.user import User
+from .schemas.user import UserBase
+
+
+from .models.database import SessionLocal
+
+LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
+logging.basicConfig(level=LOGLEVEL)
+session = SessionLocal()
 
 app = FastAPI()
 htmx_init(templates=Jinja2Templates(
@@ -17,6 +29,16 @@ htmx_init(templates=Jinja2Templates(
 async def root_page(request: Request):
     return {"greeting": "Hello World"}
 
+@app.get("/auth")
+def auth(user: UserBase):
+    usuario = user.usuario
+    senha = user.senha
+
+    user_local = session.query(User).filter_by(usuario=usuario).one_or_none()
+    if user_local != None:
+        return {"Hello": "World"}
+    else:
+        return {"null"}
 
 def start():
     """Launched with `poetry run start` at root level"""
