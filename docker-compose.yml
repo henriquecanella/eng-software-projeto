@@ -1,6 +1,6 @@
 version: "3.4"
 services:
-  eng-sofware:
+  eng-software:
     container_name: ${CONTAINER_NAME}
     image: ${IMAGE_NAME}:${IMAGE_TAG}
     depends_on:
@@ -11,7 +11,7 @@ services:
       DB_URL: postgresql://user:password@postgres/dbgestaodeconhecimento
       LOGLEVEL: INFO
     networks:
-      - eng-sofware-rede
+      - eng-software-rede
     build:
       dockerfile: Dockerfile
       context: .
@@ -19,28 +19,33 @@ services:
     volumes:
       - .:/app
     ports:
-      - 8008:8000
+      - 8000:8000
 
-  eng-sofware-nginx:
+  eng-software-nginx:
     image: nginx:latest
-    container_name: eng-sofware-nginx
+    container_name: eng-software-nginx
     restart: always
+    networks:
+      - eng-software-rede
     links:
-    - eng-sofware-front
+    - eng-software-front
     volumes:
     - ./eng_software_projeto-frontend:/www
     - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
 
-  eng-sofware-front:
+  eng-software-front:
     image: php:7.3-fpm
-    container_name: eng-sofware-front-php-fpm
+    container_name: eng-software-front-php-fpm
+    networks:
+      - eng-software-rede
     environment:
-      BACKEND_ADDRESS: eng-sofware
+      BACKEND_ADDRESS: eng-software
+      BACKEND_PORT: 8000
     depends_on:
       - postgres
-      - eng-sofware
+      - eng-software
     volumes:
     - ./eng_software_projeto-frontend:/www
 
@@ -56,8 +61,8 @@ services:
       POSTGRES_USER: "user"
       POSTGRES_PASSWORD: "password"
     networks:
-      - eng-sofware-rede
+      - eng-software-rede
 
 networks:
-  eng-sofware-rede:
+  eng-software-rede:
     driver: bridge

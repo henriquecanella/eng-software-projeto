@@ -101,7 +101,7 @@ Para acessar o frontend, basta acessar no Browser o endereço `localhost`, ou ai
 
 ## Backend
 
-Para acessar o backend, basta acessar no Browser o endereço `localhost:8008`, ou ainda pode configurar o seu arquivo `/etc/hosts` e adicionar a linha confome abaixo e o site estará disponível no endereço `eng-software-backend.local:8008`:
+Para acessar o backend, basta acessar no Browser o endereço `localhost:8000`, ou ainda pode configurar o seu arquivo `/etc/hosts` e adicionar a linha confome abaixo e o site estará disponível no endereço `eng-software-backend.local:8000`:
 
 ```
 127.0.0.1 eng-software-backend.local

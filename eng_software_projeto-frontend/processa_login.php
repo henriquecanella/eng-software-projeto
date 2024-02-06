@@ -2,34 +2,39 @@
 // começar ou retomar uma sessão
 session_start();
 
-// se vier um pedido para login
+$BACKEND_ADDRESS=getenv("BACKEND_ADDRESS");
+$BACKEND_PORT=getenv("BACKEND_PORT");
+$BACKEND_URL="http://".$BACKEND_ADDRESS.":".$BACKEND_PORT."/auth";
+
 if (!empty($_POST)) {
 
-    // estabelecer ligação com a base de dados
-    // mysql_connect('hostsql', 'username', 'password') or die(mysql_error());
-    // mysql_select_db('basedados');
-
-    // receber o pedido de login com segurança
-    // $username = mysql_real_escape_string($_POST['username']);
-    // $password = sha1($_POST['password']);
-
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = $_POST['pass'];
 
-    // verificar o utilizador em questão (pretendemos obter uma única linha de registos)
-    // $login = mysql_query("SELECT userid, username FROM users WHERE username = '$username' AND password = '$password'");
+    $data = array(
+        'usuario' => $username,
+        'senha' => $password
+    );
 
-    // if ($login && mysql_num_rows($login) == 1) {
-    if ($username == "user") {
+    $corpo = json_encode($data);
+    $opts = array('http' =>
+        array(
+            'method'  => 'GET',
+            'header'  => "Content-Type: application/json",
+            'content' => $corpo,
+            'timeout' => 60
+        )
+        );
 
-        // o utilizador está correctamente validado
-        // guardamos as suas informações numa sessão
-        // $_SESSION['id'] = mysql_result($login, 0, 0);
-        // $_SESSION['username'] = mysql_result($login, 0, 1);
+    $context = stream_context_create($opts);
+    $file = file_get_contents($BACKEND_URL, false, $context);
+    $data = json_decode($file);
+
+    if ( $data->logged == true ) {
         $_SESSION['id'] = $username;
         $_SESSION['username'] = $username;
 
-        header("Location: cadastro_pessoa.php");
+        header("Location: pagina_inicial.php");
     } else {
         // falhou o login
         echo "<p>Utilizador ou password invalidos. <a href=\"login.php\">Tente novamente</a></p>";
