@@ -43,6 +43,18 @@ def auth(user: UserBase):
     else:
         return {"null"}
 
+@app.post("/cadastro_pessoa")
+def auth(user: UserBase):
+    db_user = User(nome=user.nome, email=user.email, usuario=user.usuario, senha=user.senha, wpp=user.wpp, skype=user.skype, cargo=user.cargo)
+    try:
+        session.add(db_user)
+        session.commit()
+        session.refresh(db_user)
+        return {"cadastro_pessoa": "True"}
+    except:
+        session.rollback()
+        return {"null"}
+
 def start():
     """Launched with `poetry run start` at root level"""
     uvicorn.run("eng_software_projeto.main:app", host="0.0.0.0", port=8000,

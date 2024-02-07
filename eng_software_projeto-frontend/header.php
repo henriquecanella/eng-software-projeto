@@ -27,18 +27,12 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="cadastro_pessoa.php">Pessoa</a></li>
             <li><a class="dropdown-item" href="cadastro_projeto.php">Projeto</a></li>
-            <li><a class="dropdown-item" href="cadastro_tarefa.php">tarefa</a></li>
+            <li><a class="dropdown-item" href="cadastro_tarefa.php">Tarefa</a></li>
             <li><a class="dropdown-item" href="cadastro_subtarefa.php">Subtarefa</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Opção 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Opção 3</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Opção 4</a>
+          <a class="nav-link" href="#">Projetos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Opção 5</a>
@@ -50,7 +44,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <?php
-            echo $_SESSION['username'].' <img src="imagens/user.png" alt="User Icon" class="user-icon"> ';
+            echo '<img src="imagens/user.png" alt="User Icon" class="user-icon"> '.$_SESSION['username'];
           ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
