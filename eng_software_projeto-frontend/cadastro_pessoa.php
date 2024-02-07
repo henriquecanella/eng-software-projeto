@@ -49,8 +49,8 @@
             </div>
 
             <div class="mb-3">
-              <label for="skype" class="form-label">Skype</label>
-              <input type="text" class="form-control" name="skype" id="skype" placeholder="Digite o Skype" required>
+              <label for="skype" class="form-label">LinkedIn</label>
+              <input type="text" class="form-control" name="linkedin" id="linkedin" placeholder="Digite o Linkedin" required>
             </div>
 
             <div class="mb-3">
