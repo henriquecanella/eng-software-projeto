@@ -18,22 +18,22 @@
             <img src="imagens/logo2.png" alt="Logo" class="img-fluid">
           </div>
 
-          <form>
+          <form name="" method="post" action="processa_login.php">
             <div class="mb-3">
               <label for="username" class="form-label">Usuário</label>
-              <input type="text" class="form-control" id="username" placeholder="Digite seu username" required>
+              <input type="text" name="username" class="form-control" id="username" placeholder="Digite seu username" required>
             </div>
 
             <div class="mb-3">
               <label for="password" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+              <input type="password" name="pass" class="form-control" id="pass" placeholder="Digite sua senha" required>
             </div>
 
             <div class="mb-3">
               <a href="esqueci_minha_senha.html" class="text-decoration-none">Esqueceu sua senha?</a>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <button type="submit" name="submit" class="btn btn-primary w-100">Login</button>
           </form>
         </div>
       </div>

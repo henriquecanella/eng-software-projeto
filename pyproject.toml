@@ -13,6 +13,8 @@ uvicorn = {extras = ["standard"], version = "^0.25.0"}
 fastapi-htmx = "^0.4.1"
 sqlalchemy = "^2.0.25"
 python-dotenv = "^1.0.1"
+psycopg2 = "^2.9.9"
+logging = "^0.4.9.6"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS tbl_competencias (
 CREATE TABLE IF NOT EXISTS tbl_pessoas (
   id_pessoas SERIAL PRIMARY KEY,
   nome VARCHAR(45) NOT NULL,
-  email VARCHAR(30) NOT NULL,
+  email VARCHAR(30) NOT NULL UNIQUE,
   usuario VARCHAR(20) NOT NULL,
   senha VARCHAR(20) NOT NULL,
   wpp VARCHAR(11) NOT NULL,
@@ -194,3 +194,21 @@ CREATE TABLE IF NOT EXISTS tbl_feedback (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+INSERT INTO tbl_pessoas (
+  nome,
+  email,
+  usuario,
+  senha,
+  wpp,
+  skype,
+  cargo
+  ) VALUES (
+    'Administrador',
+    'admin@local',
+    'admin',
+    'admin',
+    '00000000000',
+    'admin@local',
+     1
+  );
