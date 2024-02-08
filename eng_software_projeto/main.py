@@ -2,16 +2,13 @@ import uvicorn
 import logging
 import os
 
-from pathlib import Path
-from typing import Union
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi_htmx import htmx, htmx_init
-from pydantic import BaseModel
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 from .models.user import User
 from .schemas.user import UserBase
-
+from .models.project import Project
+from .schemas.project import ProjectBase
 
 from .models.database import SessionLocal
 
@@ -20,14 +17,12 @@ logging.basicConfig(level=LOGLEVEL)
 session = SessionLocal()
 
 app = FastAPI()
-htmx_init(templates=Jinja2Templates(
-    directory=Path("eng_software_projeto") / "templates"))
 
 
-@app.get("/", response_class=HTMLResponse)
-@htmx("index", "index")
-async def root_page(request: Request):
+@app.get("/")
+def root_page():
     return {"greeting": "Hello World"}
+
 
 @app.get("/auth")
 def auth(user: UserBase):
@@ -43,6 +38,7 @@ def auth(user: UserBase):
     else:
         return {"null"}
 
+
 @app.post("/cadastro_pessoa")
 def auth(user: UserBase):
     db_user = User(nome=user.nome, email=user.email, usuario=user.usuario, senha=user.senha, wpp=user.wpp, skype=user.skype, cargo=user.cargo)
@@ -54,6 +50,26 @@ def auth(user: UserBase):
     except:
         session.rollback()
         return {"null"}
+
+
+@app.post("/projects")
+def post_project(project: ProjectBase):
+    db_project = Project(titulo=project.titulo, descricao=project.descricao, data_inicio=project.data_inicio, data_fim=project.data_fim)
+    try:
+        session.add(db_project)
+        session.commit()
+        session.refresh(db_project)
+        return {"cadastro_projeto": "True"}
+    except:
+        session.rollback()
+        return {"null"}
+
+
+@app.get("/projects")
+def get_projects():
+    all_projects = session.query(Project).all()
+    print(all_projects)
+    return all_projects
 
 def start():
     """Launched with `poetry run start` at root level"""
