@@ -22,25 +22,25 @@
 
           <h2 class="text-center mb-4">Cadastro de Projeto</h2>
 
-          <form action="cadastro_tarefa.php" method="post">
+          <form action="<? $PHP_SELF; ?>" method="post">
             <div class="mb-3">
               <label for="titulo" class="form-label">Título do Projeto</label>
-              <input type="text" class="form-control" id="titulo" placeholder="Digite o título do projeto" required>
+              <input type="text" name="titulo" class="form-control" id="titulo" placeholder="Digite o título do projeto" required>
             </div>
 
             <div class="mb-3">
               <label for="descricao" class="form-label">Descrição</label>
-              <textarea class="form-control" id="descricao" placeholder="Digite a descrição do projeto" required></textarea>
+              <textarea class="form-control" name="descricao" id="descricao" placeholder="Digite a descrição do projeto" required></textarea>
             </div>
 
             <div class="mb-3">
-              <label for="dataInicio" class="form-label">Data de Início</label>
-              <input type="date" class="form-control" id="dataInicio" required>
+              <label for="data_inicio" class="form-label">Data de Início</label>
+              <input type="date" class="form-control" name="data_inicio" id="data_inicio" required>
             </div>
 
             <div class="mb-3">
-              <label for="dataFim" class="form-label">Data de Fim</label>
-              <input type="date" class="form-control" id="dataFim" required>
+              <label for="data_fim" class="form-label">Data de Fim</label>
+              <input type="date" class="form-control" name="data_fim" id="data_fim" required>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Criar Projeto</button>
@@ -58,3 +58,47 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<?php
+    if(isset($_POST['titulo'])){
+      $BACKEND_ADDRESS=getenv("BACKEND_ADDRESS");
+      $BACKEND_PORT=getenv("BACKEND_PORT");
+      $BACKEND_URL="http://".$BACKEND_ADDRESS.":".$BACKEND_PORT."/projects";
+
+      $titulo     = $_POST['titulo'];
+      $descricao    = $_POST['descricao'];
+      $data_inicio  = $_POST['data_inicio'];
+      $data_fim    = $_POST['data_fim'];
+
+      $data = array(
+        'titulo'    => $titulo,
+        'descricao'   => $descricao,
+        'data_inicio' => $data_inicio,
+        'data_fim'   => $data_fim,
+      );
+
+      $corpo = json_encode($data);
+      // echo $corpo;
+      $opts = array('http' =>
+          array(
+              'method'  => 'POST',
+              'header'  => "Content-Type: application/json",
+              'content' => $corpo,
+              'timeout' => 60
+          )
+          );
+      $context = stream_context_create($opts);
+      $file = file_get_contents($BACKEND_URL, false, $context);
+      $data = json_decode($file);
+
+      if( $data->cadastro_projeto == true ){
+        echo '<script language="javascript" type="text/javascript">
+          window.location.href="operacao_realizada_com_sucesso.php"
+          </script>';
+      } else{
+        echo '<script language="javascript" type="text/javascript">
+        window.location.href="operacao_falhou.php"
+        </script>';
+      }
+
+  }
+?>
